@@ -6,19 +6,48 @@ class Program
     {
         Console.WriteLine("Login Application");
 
-        // Prompt for username
-        Console.Write("Enter your email address: ");
-        string? username = Console.ReadLine();
+        bool isValidEmail = false;
+        bool isValidPassword = false;
+        string? username = null;
+        string? password = null;
 
-        // Validate username
-        if (username != null && IsValidEmail(username))
+        while (!isValidEmail)
         {
-            Console.WriteLine("Login successful!");
+            // Prompt for username
+            Console.Write("Enter your email address: ");
+            username = Console.ReadLine();
+
+            // Validate username 
+            if (username != null)
+            {
+                isValidEmail = IsValidEmail(username);
+            }
+
+            if (!isValidEmail)
+            {
+                Console.WriteLine("Invalid email address. Please try again.");
+            }
         }
-        else
+
+        while (!isValidPassword)
         {
-            Console.WriteLine("Invalid email address. Please try again.");
+            // Prompt for password
+            Console.Write("Enter your password: ");
+            password = Console.ReadLine();
+
+            // Validate password
+            if (password != null)
+            {
+                isValidPassword = password.Length >= 8;
+            }
+
+            if (!isValidPassword)
+            {
+                Console.WriteLine("Invalid password. Please try again.");
+            }
         }
+
+        Console.WriteLine("Login successful!");
     }
 
     static bool IsValidEmail(string email)
